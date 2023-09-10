@@ -1,0 +1,146 @@
+{
+  "name": "ngu-nx2",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "sourceRoot": "apps/ngu-nx2/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/ngu-nx2/browser",
+        "index": "apps/ngu-nx2/src/index.html",
+        "main": "apps/ngu-nx2/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ngu-nx2/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/ngu-nx2/src/favicon.ico", "apps/ngu-nx2/src/assets"],
+        "styles": ["apps/ngu-nx2/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "ngu-nx2:build:production"
+        },
+        "development": {
+          "browserTarget": "ngu-nx2:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "ngu-nx2:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "tsConfig": "apps/ngu-nx2/tsconfig.spec.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/ngu-nx2/src/favicon.ico", "apps/ngu-nx2/src/assets"],
+        "styles": ["apps/ngu-nx2/src/styles.scss"],
+        "scripts": []
+      }
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/ngu-nx2/server",
+        "main": "apps/ngu-nx2/server.ts",
+        "tsConfig": "apps/ngu-nx2/tsconfig.server.json",
+        "inlineStyleLanguage": "scss",
+        "externalDependencies": [
+          "@nestjs/microservices",
+          "@nestjs/microservices/microservices-module",
+          "@nestjs/websockets",
+          "@nestjs/websockets/socket-module",
+          "cache-manager"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "optimization": false
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "ngu-nx2:build:development",
+          "serverTarget": "ngu-nx2:server:development"
+        },
+        "production": {
+          "browserTarget": "ngu-nx2:build:production",
+          "serverTarget": "ngu-nx2:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "ngu-nx2:build:production",
+          "serverTarget": "ngu-nx2:server:production"
+        },
+        "development": {
+          "browserTarget": "ngu-nx2:build:development",
+          "serverTarget": "ngu-nx2:server:development"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}
