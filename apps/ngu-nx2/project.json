@@ -16,11 +16,18 @@
         "outputPath": "dist/ngu-nx2/browser",
         "index": "apps/ngu-nx2/src/index.html",
         "main": "apps/ngu-nx2/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/ngu-nx2/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/ngu-nx2/src/favicon.ico", "apps/ngu-nx2/src/assets"],
-        "styles": ["apps/ngu-nx2/src/styles.scss"],
+        "assets": [
+          "apps/ngu-nx2/src/favicon.ico",
+          "apps/ngu-nx2/src/assets"
+        ],
+        "styles": [
+          "apps/ngu-nx2/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -49,7 +56,9 @@
         }
       },
       "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -72,11 +81,19 @@
     "test": {
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "polyfills": ["zone.js", "zone.js/testing"],
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
         "tsConfig": "apps/ngu-nx2/tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/ngu-nx2/src/favicon.ico", "apps/ngu-nx2/src/assets"],
-        "styles": ["apps/ngu-nx2/src/styles.scss"],
+        "assets": [
+          "apps/ngu-nx2/src/favicon.ico",
+          "apps/ngu-nx2/src/assets"
+        ],
+        "styles": [
+          "apps/ngu-nx2/src/styles.scss"
+        ],
         "scripts": []
       }
     },
