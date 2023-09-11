@@ -3,6 +3,25 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug myservice",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "nx",
+      "runtimeArgs": [
+        "serve",
+        "myservice",
+        "--inspect"
+      ],
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/*"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ]
+    },
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",

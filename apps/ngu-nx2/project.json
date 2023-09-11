@@ -70,7 +70,10 @@
           "browserTarget": "ngu-nx2:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/ngu-nx2/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -96,68 +99,6 @@
         ],
         "scripts": []
       }
-    },
-    "server": {
-      "executor": "@angular-devkit/build-angular:server",
-      "options": {
-        "outputPath": "dist/ngu-nx2/server",
-        "main": "apps/ngu-nx2/server.ts",
-        "tsConfig": "apps/ngu-nx2/tsconfig.server.json",
-        "inlineStyleLanguage": "scss",
-        "externalDependencies": [
-          "@nestjs/microservices",
-          "@nestjs/microservices/microservices-module",
-          "@nestjs/websockets",
-          "@nestjs/websockets/socket-module",
-          "cache-manager"
-        ]
-      },
-      "configurations": {
-        "production": {
-          "outputHashing": "media",
-          "optimization": false
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "sourceMap": true,
-          "extractLicenses": false,
-          "vendorChunk": true
-        }
-      },
-      "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath}"]
-    },
-    "serve-ssr": {
-      "executor": "@nguniversal/builders:ssr-dev-server",
-      "configurations": {
-        "development": {
-          "browserTarget": "ngu-nx2:build:development",
-          "serverTarget": "ngu-nx2:server:development"
-        },
-        "production": {
-          "browserTarget": "ngu-nx2:build:production",
-          "serverTarget": "ngu-nx2:server:production"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "prerender": {
-      "executor": "@nguniversal/builders:prerender",
-      "options": {
-        "routes": ["/"]
-      },
-      "configurations": {
-        "production": {
-          "browserTarget": "ngu-nx2:build:production",
-          "serverTarget": "ngu-nx2:server:production"
-        },
-        "development": {
-          "browserTarget": "ngu-nx2:build:development",
-          "serverTarget": "ngu-nx2:server:development"
-        }
-      },
-      "defaultConfiguration": "production"
     }
   }
 }

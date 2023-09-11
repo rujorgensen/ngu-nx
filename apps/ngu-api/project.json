@@ -1,0 +1,143 @@
+{
+  "name": "ngu-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ngu-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/ngu-api",
+        "main": "apps/ngu-api/src/main.ts",
+        "tsConfig": "apps/ngu-api/tsconfig.app.json",
+        "assets": [
+          "apps/ngu-api/src/assets"
+        ],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/ngu-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ngu-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ngu-api:build:development"
+        },
+        "production": {
+          "buildTarget": "ngu-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/ngu-api/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/ngu-api/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/ngu-nx2/server",
+        "main": "apps/ngu-api/server.ts",
+        "tsConfig": "apps/ngu-api/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "externalDependencies": [
+          "@nestjs/microservices",
+          "@nestjs/microservices/microservices-module",
+          "@nestjs/websockets",
+          "@nestjs/websockets/socket-module",
+          "cache-manager"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "optimization": false
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "ngu-nx2:build:development",
+          "serverTarget": "ngu-api:server:development"
+        },
+        "production": {
+          "browserTarget": "ngu-nx2:build:production",
+          "serverTarget": "ngu-api:server:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 9222
+      }
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "routes": [
+          "/"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "ngu-nx2:build:production",
+          "serverTarget": "ngu-api:server:production"
+        },
+        "development": {
+          "browserTarget": "ngu-nx2:build:development",
+          "serverTarget": "ngu-api:server:development"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  },
+  "tags": []
+}
