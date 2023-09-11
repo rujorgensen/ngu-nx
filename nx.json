@@ -34,5 +34,8 @@
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     }
+  },
+  "workspaceLayout": {
+    "projectNameAndRootFormat": "as-provided"
   }
 }
