@@ -107,17 +107,15 @@
       "configurations": {
         "development": {
           "browserTarget": "ngu-nx2:build:development",
-          "serverTarget": "ngu-api:server:development"
+          "serverTarget": "ngu-api:server:development",
+          "port": 9000
         },
         "production": {
           "browserTarget": "ngu-nx2:build:production",
           "serverTarget": "ngu-api:server:production"
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "port": 9222
-      }
+      "defaultConfiguration": "development"
     },
     "prerender": {
       "executor": "@nguniversal/builders:prerender",
